@@ -38,12 +38,9 @@ const history = useHistory();
             <Search color="#ffffff"></Search>
           </div>
         </div>
-        <div className="language">
-          <span> ENGLISH </span>
-          <Arrow></Arrow>
-        </div>
+        
         <div className="loginPage">
-          <span style={{textTransform:'uppercase',fontSize:'18px',cursor:'pointer',color:'red'}}> <b>{user ? user.displayName : <span onClick={()=>{
+          <span style={{textTransform:'uppercase',fontSize:'18px',cursor:'pointer',color:'red'}}><b>{user ? <span onClick={()=>{history.push('/')}}>{user.displayName}</span>   : <span onClick={()=>{
            history.push('/login')
         }}>Login</span>}</b> </span>
           

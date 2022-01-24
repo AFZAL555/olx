@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react';
 import './Create.css';
+ 
 import Header from '../Header/Header';
 import { useHistory } from 'react-router-dom';
 import { AuthContext, FirebaseContext } from '../../store/FirebaseContext';
@@ -46,7 +47,7 @@ const handleSubmit = ()=>{
             onChange={(e) => { setName(e.target.value) }}
               id="fname"
               name="Name"
-              defaultValue="John"
+              
             />
             <br />
             <label htmlFor="fname">Category</label>
@@ -58,7 +59,7 @@ const handleSubmit = ()=>{
             onChange={(e) => { setCategory(e.target.value) }}
               id="fname"
               name="category"
-              defaultValue="John"
+             
             />
             <br />
             <label htmlFor="fname">Price</label>
@@ -69,7 +70,7 @@ const handleSubmit = ()=>{
             <br />
           
           <br />
-          <img alt="Posts" width="200px" height="200px" src={image ? URL.createObjectURL(image): " "}></img>
+          <img alt="Posts" width={image ? "200px":'60px'} height={image ? "200px":'60px'} src={image ? URL.createObjectURL(image): "./Images/filepic.png"}></img>
           
             <br />
             <input  onChange={(e)=>{

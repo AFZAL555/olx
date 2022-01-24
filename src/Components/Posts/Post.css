@@ -30,15 +30,24 @@
   overflow-x: scroll;
   overflow-y: hidden;
 }
+.cards{
+  overflow-x:scroll;
+  overflow-y:hidden ;
+}
+.cards::-webkit-scrollbar{
+  display: none;
+}
 
 .card {
   margin-right: 15px;
   padding: 13px;
   max-width: 222px;
   width: 222px;
-  height: 270px;
+  height: 290px;
   display: inline-block;
   cursor: pointer;
+  border: 1px solid black;
+  
 }
 
 .card .favorite {
@@ -51,6 +60,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+
+.card:hover{
+  transform: scale(1.1);
+  border: 1px solid black;
+
 }
 
 .card .image img {
@@ -84,4 +100,8 @@
 .recommendations .heading span {
   font-size: 24px;
   color: #002f34;
+}
+.a{
+  text-decoration: none;
+  color: black;
 }

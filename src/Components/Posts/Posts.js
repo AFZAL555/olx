@@ -1,14 +1,18 @@
-import React,{useEffect,useContext,useState} from 'react';
-import {FirebaseContext} from '../../store/FirebaseContext'
+import React, { useEffect, useContext, useState } from 'react';
+import { FirebaseContext } from '../../store/FirebaseContext'
+import {PostContext} from '../../store/postContext'
 import Heart from '../../assets/Heart';
 import './Post.css';
-import { firestore } from 'firebase';
+import { useHistory } from 'react-router-dom';
+
 
 function Posts() {
 
-  const {firebase} = useContext(FirebaseContext);
-  
+  const { firebase } = useContext(FirebaseContext);
+  const {setPostDetails} = useContext(PostContext)
+  const history = useHistory();
   const [product, setProduct] = useState();
+
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -18,35 +22,44 @@ function Posts() {
       setProduct(postData);
     });
   }, []);
-
   console.log(product);
- 
+
   return (
     <div className="postParentDiv">
       <div className="moreView">
         <div className="heading">
           <span>Quick Menu</span>
-          <span>View more</span>
+          
         </div>
         <div className="cards">
-          <div
-            className="card"
-          >
-            <div className="favorite">
-              <Heart></Heart>
+
+
+          {product && product.map(pro => {
+            return <div 
+              className="card">
+              <div className="favorite">
+                <Heart></Heart>
+              </div>
+              <div onClick={()=>{
+              setPostDetails(pro);
+              history.push('/viewpost');
+            }
+                }  className="image">
+                <img src={pro.url} alt="product" />
+              </div>
+              <div className="content">
+                <p className="rate">&#x20B9; {pro.price}</p>
+                <span className="kilometer">{pro.category}</span>
+                <p className="name"> {pro.name}</p>
+              </div>
+              <div className="date">
+                <span> {pro.Created_at}</span>
+              </div>
             </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
-          </div>
+
+          })}
+
+
         </div>
       </div>
       <div className="recommendations">
@@ -54,22 +67,33 @@ function Posts() {
           <span>Fresh recommendations</span>
         </div>
         <div className="cards">
-          <div className="card">
+
+
+        {product && product.map(pro => {
+            return <div 
+               className="card">
             <div className="favorite">
               <Heart></Heart>
             </div>
             <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
+              <img onClick={()=>{
+              setPostDetails(pro);
+              history.push('/viewpost');
+            }
+                }  src={pro.url} alt="" />
             </div>
             <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
+              <p className="rate">&#x20B9; {pro.price}</p>
+              <span className="kilometer">{pro.category}</span>
+              <p className="name"> {pro.name}</p>
             </div>
             <div className="date">
-              <span>10/5/2021</span>
+              <span> {pro.Created_at}</span>
             </div>
-          </div>
+          </div> 
+        })}
+
+
         </div>
       </div>
     </div>
